@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["es2022"],
+    "module": "ES2022",
+    "rootDir": "./",
+    "typeRoots": ["src/Types", "node_modules/@types"],
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "allowJs": true,
+    "outDir": "dist",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "noImplicitAny": true,
+    "skipLibCheck": true
+  },
+  "include": ["**/*.ts", "**/*.d.ts"],
+  "exclude": ["node_modules"]
+}
