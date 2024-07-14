@@ -1,4 +1,3 @@
-import loggerUtilities from "../../utilities/logger-utilities.js";
 import { Client, GuildMember } from "discord.js";
 
 export default {

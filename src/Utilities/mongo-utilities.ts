@@ -5,10 +5,13 @@ import consoleUtilities from "./console-utilities.js";
 class MongoUtilities {
   private _db: mongodb.Db | null = null;
   private _client: mongodb.MongoClient | null = null;
+  private initializing = false;
+  private initialized = false;
 
   public connectToDB() {
     return new Promise(async (resolve, reject) => {
       this.databaseLog("Connecting to DB...");
+      this.initializing = true;
 
       const dbName = `${configuration.mongo.scheme}-${process.env.NODE_ENV}`;
       const urlWithSchema = this.addSchemaToUrl(configuration.mongo.url as string, dbName);
@@ -21,9 +24,12 @@ class MongoUtilities {
         this._db = this._client.db(dbName);
         this.databaseLog(`Connected to DB ${dbName}`);
 
+        this.initializing = false;
+        this.initialized = true;
         resolve(this._db);
       } catch (err) {
         this.databaseError(`Failed to connect to DB. rejecting ${err}`);
+        this.initializing = false;
         reject(err);
       }
     });
@@ -42,7 +48,14 @@ class MongoUtilities {
   }
 
   public async getCollection(collectionName: string) {
+    await this.ensureConnection();
     return this._db?.collection(collectionName);
+  }
+
+  public async ensureConnection() {
+    if (!this.initialized) {
+      await this.connectToDB();
+    }
   }
 
   public isIdValid(id: any) {
