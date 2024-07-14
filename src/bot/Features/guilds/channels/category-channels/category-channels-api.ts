@@ -6,7 +6,7 @@ class CategoryChannelsApi extends ChannelsAPI {
     super(guild);
   }
 
-  public async createTextChannel(name: string, permissions: Array<OverwriteResolvable> = []) {
+  public async createCategoryChannel(name: string, permissions: Array<OverwriteResolvable> = []) {
     return this.createChannel({ name, type: ChannelType.GuildCategory, permissionOverwrites: permissions });
   }
 }
