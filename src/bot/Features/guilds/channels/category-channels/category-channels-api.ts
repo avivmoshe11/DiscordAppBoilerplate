@@ -1,4 +1,4 @@
-import { ChannelType, Guild, OverwriteResolvable } from "discord.js";
+import { CategoryChannel, ChannelType, Guild, OverwriteResolvable } from "discord.js";
 import ChannelsAPI from "../channels-api";
 
 class CategoryChannelsApi extends ChannelsAPI {
@@ -7,7 +7,7 @@ class CategoryChannelsApi extends ChannelsAPI {
   }
 
   public async createCategoryChannel(name: string, permissions: Array<OverwriteResolvable> = []) {
-    return this.createChannel({ name, type: ChannelType.GuildCategory, permissionOverwrites: permissions });
+    return this.createChannel<CategoryChannel>({ name, type: ChannelType.GuildCategory, permissionOverwrites: permissions });
   }
 }
 
