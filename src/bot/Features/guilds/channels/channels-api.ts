@@ -1,9 +1,9 @@
 import { BaseFetchOptions, GuildChannelCreateOptions, GuildChannelEditOptions, SetChannelPositionOptions } from "discord.js"; // interface
 import { Snowflake, GuildChannelResolvable } from "discord.js"; // type
 import { Guild, GuildChannelManager, GuildChannel } from "discord.js"; // class
-import GuildsAPI from "../guilds-api";
+import GuildsApi from "../guilds-api.js";
 
-class ChannelsAPI extends GuildsAPI {
+class ChannelsApi extends GuildsApi {
   protected channelManager: GuildChannelManager;
 
   constructor(guild: Guild) {
@@ -32,4 +32,4 @@ class ChannelsAPI extends GuildsAPI {
   }
 }
 
-export default ChannelsAPI;
+export default ChannelsApi;

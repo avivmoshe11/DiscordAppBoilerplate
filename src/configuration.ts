@@ -1,7 +1,7 @@
 import assignDeep from "assign-deep";
 import consoleUtilities from "./Utilities/console-utilities.js";
 
-const appName = "boilerplate";
+const appName = "PhasmophobiaElite";
 
 const config = {
   common: {

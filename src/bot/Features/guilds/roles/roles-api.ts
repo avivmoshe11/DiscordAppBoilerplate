@@ -1,7 +1,7 @@
 import { BaseFetchOptions, Guild, RoleCreateOptions, RoleManager } from "discord.js";
-import GuildsAPI from "../guilds-api";
+import GuildsApi from "../guilds-api.js";
 
-class RolesApi extends GuildsAPI {
+class RolesApi extends GuildsApi {
   protected rolesManager: RoleManager;
 
   constructor(guild: Guild) {

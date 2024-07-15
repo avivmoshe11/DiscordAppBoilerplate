@@ -2,7 +2,7 @@ import { Client, GuildMember } from "discord.js";
 
 export default {
   name: "guildMemberAdd",
-  async execute(member: GuildMember, client: Client) {
+  async execute(client: Client, member: GuildMember) {
     //await member.roles.add();
   }
 };
