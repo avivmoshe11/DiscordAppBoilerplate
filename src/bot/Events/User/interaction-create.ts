@@ -11,7 +11,8 @@ export default {
 
 async function commandHandler(client: Client, interaction: CommandInteraction) {
   if (interaction.isChatInputCommand()) {
-    CommandsUtilities.logCommandTriggered(interaction.commandName);
+    const subCommand = interaction.options.getSubcommand(false);
+    CommandsUtilities.logCommandTriggered(interaction.commandName.concat(subCommand ? ` (sub-command) ${subCommand}` : ""));
 
     try {
       await clientBl.getCommands()[interaction.commandName].action(client, interaction);
