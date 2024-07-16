@@ -1,10 +1,10 @@
-import { ChangeStreamDeleteDocument, ChangeStreamDocument, ChangeStreamInsertDocument, ChangeStreamUpdateDocument } from "mongodb";
+import { ChangeStreamDeleteDocument, ChangeStreamDocument, ChangeStreamInsertDocument, ChangeStreamUpdateDocument, ObjectId } from "mongodb";
 import consoleUtilities from "../../../../Utilities/console-utilities.js";
 import BaseCollection from "../../abstract/base-collection.js";
 import { LFGRole, LFGRoleEntity } from "./lfg-roles-definitions.js";
 
 class LFGRolesCollection extends BaseCollection<LFGRoleEntity> {
-  public rolesCache: Array<LFGRole> = [];
+  private rolesCache: Array<LFGRole> = [];
 
   constructor() {
     super("lfg-roles");
@@ -23,6 +23,18 @@ class LFGRolesCollection extends BaseCollection<LFGRoleEntity> {
 
   public async editRole(id: string, ...args: Partial<LFGRole>[]) {
     return this.update({ id }, Object.assign({}, ...args));
+  }
+
+  public async deleteRole(id: string) {
+    return this.deleteByQuery({ id });
+  }
+
+  public async deleteRoleByObjectId(_id: ObjectId) {
+    return this.delete(_id.toString());
+  }
+
+  public getCachedRoles() {
+    return this.rolesCache;
   }
 
   /********************************************
@@ -101,4 +113,4 @@ class LFGRolesCollection extends BaseCollection<LFGRoleEntity> {
   }
 }
 
-export default LFGRolesCollection;
+export default new LFGRolesCollection();

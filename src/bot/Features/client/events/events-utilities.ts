@@ -29,6 +29,10 @@ class EventsUtilities {
     return path.resolve(__dirname, "../../../Events");
   }
 
+  public static logCrashedCommand(eventName: string) {
+    consoleUtilities.error(`"${eventName}" event has crashed.`, "BOT", "event");
+  }
+
   public static logRegisteredEvents(eventNames: Array<string>) {
     consoleUtilities.log(`Registered ${eventNames.join(", ")} events.`, "BOT", "app-load-process");
   }

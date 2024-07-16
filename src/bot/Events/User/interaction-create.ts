@@ -9,9 +9,14 @@ export default {
   }
 };
 
-function commandHandler(client: Client, interaction: CommandInteraction) {
+async function commandHandler(client: Client, interaction: CommandInteraction) {
   if (interaction.isChatInputCommand()) {
     CommandsUtilities.logCommandTriggered(interaction.commandName);
-    clientBl.getCommands()[interaction.commandName].action(client, interaction);
+
+    try {
+      await clientBl.getCommands()[interaction.commandName].action(client, interaction);
+    } catch {
+      CommandsUtilities.logCrashedCommand(interaction.commandName);
+    }
   }
 }

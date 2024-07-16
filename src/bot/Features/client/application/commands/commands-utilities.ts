@@ -29,6 +29,10 @@ class CommandsUtilities {
     return path.resolve(__dirname, "../../../../Commands");
   }
 
+  public static logCrashedCommand(commandName: string) {
+    consoleUtilities.error(`"${commandName}" command has crashed.`, "BOT", "command");
+  }
+
   public static logRegisteredCommands(commandNames: Array<string>) {
     consoleUtilities.log(`Registered ${commandNames.join(", ")} commands.`, "BOT", "app-load-process");
   }
