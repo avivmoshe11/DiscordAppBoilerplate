@@ -19,7 +19,7 @@ export default {
         break;
 
       case "list":
-        embed = await listAction(client, interaction);
+        embed = listAction(client, interaction);
         break;
     }
 

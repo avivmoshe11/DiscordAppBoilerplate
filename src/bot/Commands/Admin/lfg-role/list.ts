@@ -2,12 +2,12 @@ import { ChatInputCommandInteraction, Client, Role, SlashCommandSubcommandBuilde
 import lfgRolesCollection from "../../../Features/looking-for-game/lfg-roles/lfg-roles-collection.js";
 import EmbedUtilities from "../../../Utilities/embed-utilities.js";
 
-export async function listAction(client: Client, interaction: ChatInputCommandInteraction) {
+export function listAction(client: Client, interaction: ChatInputCommandInteraction) {
   const cachedRoles = lfgRolesCollection.getCachedRoles();
 
   return EmbedUtilities.createAdvancedEmbed({
     title: "LFG Roles List",
-    description: "List of all lfg roles and matching name\n",
+    description: "List of all lfg roles and matching name\nㅤ",
     fields: cachedRoles.map((role) => ({ name: `${role.name}`, value: `<@&${role.id}>`, inline: false }))
   });
 }
