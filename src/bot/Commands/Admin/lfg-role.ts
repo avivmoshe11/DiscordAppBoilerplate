@@ -1,1 +1,1 @@
-export { default } from "../../Features/guilds/roles/lfg-roles/commands/index.js";
+export { default } from "../../Features/looking-for-game/lfg-roles/commands/index.js";

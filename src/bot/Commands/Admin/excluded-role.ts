@@ -1,1 +1,1 @@
-export { default } from "../../Features/guilds/roles/excluded-roles/commands/index.js";
+export { default } from "../../Features/looking-for-game/excluded-roles/commands/index.js";
