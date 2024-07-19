@@ -1,5 +1,5 @@
 import { Snowflake } from "discord.js";
-import { BaseEntity } from "../../abstract/base-collection-definitions.js";
+import { BaseEntity } from "../../../abstract/base-collection-definitions.js";
 import { ObjectId } from "mongodb";
 
 export type LFGRole = {

@@ -7,6 +7,7 @@ class MongoUtilities {
   private _client: mongodb.MongoClient | null = null;
   private initializing = false;
   private initialized = false;
+  private replicaSet = false;
 
   public connectToDB() {
     return new Promise(async (resolve, reject) => {
@@ -23,6 +24,9 @@ class MongoUtilities {
         this._client = client;
         this._db = this._client.db(dbName);
         this.databaseLog(`Connected to DB ${dbName}`);
+
+        this.replicaSet = await this.setReplicaSet();
+        this.databaseLog(this.replicaSet ? "Running on replica set mode." : "Running on local mode.");
 
         this.initializing = false;
         this.initialized = true;
@@ -60,6 +64,20 @@ class MongoUtilities {
 
   public isIdValid(id: any) {
     return (typeof id === "string" && (id.length === 12 || /^[\da-f]{24}$/i.test(id))) || (typeof id === "number" && Number.isInteger(id));
+  }
+
+  public async setReplicaSet() {
+    if (!this._client) {
+      throw new Error("Client is not connected");
+    }
+
+    const adminDb = this._client.db().admin();
+    const result = await adminDb.command({ isMaster: 1 });
+    return result.setName !== undefined;
+  }
+
+  public isReplicaSet() {
+    return this.replicaSet;
   }
 
   private databaseLog(msg: string) {

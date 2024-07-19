@@ -8,7 +8,7 @@ class LFGRolesUtilities {
   }
 
   public static isRoleCached({ id, name }: LFGRole) {
-    return lfgRolesCollection.getCachedRoles().some((cachedRole) => cachedRole.id === id || cachedRole.name === name);
+    return lfgRolesCollection.getCache().some((role) => role.id === id || role.name === name);
   }
 }
 

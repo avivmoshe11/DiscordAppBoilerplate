@@ -1,6 +1,6 @@
 import { ChatInputCommandInteraction, Client, Role, SlashCommandSubcommandBuilder } from "discord.js";
-import LFGRolesUtilities from "../../../Features/looking-for-game/lfg-roles/lfg-roles-utilities.js";
-import lfgRolesCollection from "../../../Features/looking-for-game/lfg-roles/lfg-roles-collection.js";
+import lfgRolesCollection from "../../lfg-roles-collection.js";
+import LFGRolesUtilities from "../../lfg-roles-utilities.js";
 
 export async function addAction(client: Client, interaction: ChatInputCommandInteraction) {
   const role = interaction.options.getRole("role") as Role;

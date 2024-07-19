@@ -1,9 +1,9 @@
 import { ChatInputCommandInteraction, Client, Role, SlashCommandSubcommandBuilder } from "discord.js";
-import lfgRolesCollection from "../../../Features/looking-for-game/lfg-roles/lfg-roles-collection.js";
+import lfgRolesCollection from "../../lfg-roles-collection.js";
 
 export async function removeAction(client: Client, interaction: ChatInputCommandInteraction) {
   const role = interaction.options.getRole("role") as Role;
-  const cachedRole = lfgRolesCollection.getCachedRoles().find((lfgRole) => lfgRole.id === role.id);
+  const cachedRole = lfgRolesCollection.getCache().find((lfgRole) => lfgRole.id === role.id);
 
   if (cachedRole) {
     await lfgRolesCollection.deleteRole(cachedRole.id);

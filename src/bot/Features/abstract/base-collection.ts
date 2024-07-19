@@ -1,13 +1,45 @@
 import * as mongodb from "mongodb";
-import { BaseEntity } from "./base-collection-definitions.js";
+import { BaseEntity, ChangeHandlers } from "./base-collection-definitions.js";
 import mongoUtilities from "../../../Utilities/mongo-utilities.js";
 import consoleUtilities from "../../../Utilities/console-utilities.js";
+import { ChangeStreamDocument } from "mongodb";
 
 class BaseCollection<T extends BaseEntity> {
   public collectionName: string;
+  protected changeHandlers: ChangeHandlers<T> = {};
 
   constructor(collectionName: string) {
     this.collectionName = collectionName;
+  }
+
+  protected setHandlers(handlers: ChangeHandlers<T>) {
+    this.changeHandlers = handlers;
+
+    if (mongoUtilities.isReplicaSet()) {
+      this.setListener();
+    }
+  }
+
+  private async setListener() {
+    const collection = await this.getCollection();
+
+    if (!collection) {
+      this.collectionLog("Failed to set up a listener, collection is undefined.");
+      return;
+    }
+
+    collection.watch().on("change", this.handleCollectionChange.bind(this));
+    this.collectionLog(`[CHANGE] Listener set successfully with handlers: ${Object.keys(this.changeHandlers).join(", ")}`);
+  }
+
+  private async handleCollectionChange(change: ChangeStreamDocument<T>) {
+    const handler = this.changeHandlers[change.operationType];
+
+    if (handler) {
+      await handler(change);
+    } else {
+      this.collectionLog(`Unhandled change operation: ${change.operationType}`);
+    }
   }
 
   public getByQuery(query?: Record<string, any>, options?: mongodb.FindOptions<any>) {
