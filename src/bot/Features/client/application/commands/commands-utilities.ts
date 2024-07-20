@@ -2,7 +2,7 @@ import fs from "fs";
 import path from "path";
 import { fileURLToPath, pathToFileURL } from "url";
 import { CommandFileImport } from "./commands-definitions.js";
-import consoleUtilities from "../../../../../Utilities/console-utilities.js";
+import botConsoleUtilities from "../../../../../Utilities/console/bot-console-utilities.js";
 
 class CommandsUtilities {
   public static async getCommandFiles() {
@@ -29,16 +29,16 @@ class CommandsUtilities {
     return path.resolve(__dirname, "../../../../Commands");
   }
 
-  public static logCrashedCommand(commandName: string) {
-    consoleUtilities.error(`"${commandName}" command has crashed.`, "BOT", "command");
+  public static logCrashedCommand(commandName: string, error: any) {
+    botConsoleUtilities.error(`"${commandName}" command has crashed, error: ${error}`, "BOT", "command");
   }
 
   public static logRegisteredCommands(commandNames: Array<string>) {
-    consoleUtilities.log(`Registered ${commandNames.join(", ")} commands.`, "BOT", "app-load-process");
+    botConsoleUtilities.log(`Registered ${commandNames.join(", ")} commands.`, "BOT", "app-load-process");
   }
 
   public static logCommandTriggered(commandName: string) {
-    consoleUtilities.log(`"${commandName}" command has been triggered.`, "BOT", "command");
+    botConsoleUtilities.log(`"${commandName}" command has been triggered.`, "BOT", "command");
   }
 }
 

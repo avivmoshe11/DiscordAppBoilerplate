@@ -1,6 +1,6 @@
 import * as mongodb from "mongodb";
 import configuration from "../configuration.js";
-import consoleUtilities from "./console-utilities.js";
+import mongoConsoleUtilities from "./console/mongo-console-utilities.js";
 
 class MongoUtilities {
   private _db: mongodb.Db | null = null;
@@ -81,11 +81,11 @@ class MongoUtilities {
   }
 
   private databaseLog(msg: string) {
-    consoleUtilities.log(msg, "DATABASE", "app-load-process");
+    mongoConsoleUtilities.log(msg, "DATABASE", "app-load-process");
   }
 
   private databaseError(msg: string) {
-    consoleUtilities.error(msg, "DATABASE", "app-load-process");
+    mongoConsoleUtilities.error(msg, "DATABASE", "app-load-process");
   }
 }
 

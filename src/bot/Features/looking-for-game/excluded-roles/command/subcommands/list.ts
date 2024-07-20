@@ -1,6 +1,6 @@
 import { ChatInputCommandInteraction, Client, Role, SlashCommandSubcommandBuilder } from "discord.js";
 import excludedRolesCollection from "../../excluded-roles-collection.js";
-import EmbedUtilities from "../../../../../../Utilities/embed-utilities.js";
+import EmbedUtilities from "../../../../../Utilities/embed-utilities.js";
 
 export function listAction(client: Client, interaction: ChatInputCommandInteraction) {
   const cachedRoles = excludedRolesCollection.getCache();

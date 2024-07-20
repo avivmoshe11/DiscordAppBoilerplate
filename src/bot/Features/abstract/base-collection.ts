@@ -1,10 +1,10 @@
 import * as mongodb from "mongodb";
 import { BaseEntity, ChangeHandlers } from "./base-collection-definitions.js";
 import mongoUtilities from "../../../Utilities/mongo-utilities.js";
-import consoleUtilities from "../../../Utilities/console-utilities.js";
 import { ChangeStreamDocument } from "mongodb";
+import mongoConsoleUtilities from "../../../Utilities/console/mongo-console-utilities.js";
 
-class BaseCollection<T extends BaseEntity> {
+abstract class BaseCollection<T extends BaseEntity> {
   public collectionName: string;
   protected changeHandlers: ChangeHandlers<T> = {};
 
@@ -112,11 +112,11 @@ class BaseCollection<T extends BaseEntity> {
   }
 
   public collectionLog(msg: string) {
-    consoleUtilities.log(msg, "DATABASE", this.collectionName);
+    mongoConsoleUtilities.log(msg, "DATABASE", this.collectionName);
   }
 
   public collectionError(msg: string) {
-    consoleUtilities.error(msg, "DATABASE", this.collectionName);
+    mongoConsoleUtilities.error(msg, "DATABASE", this.collectionName);
   }
 }
 

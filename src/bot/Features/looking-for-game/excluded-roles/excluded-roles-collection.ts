@@ -1,8 +1,8 @@
 import { ChangeStreamDeleteDocument, ChangeStreamDocument, ChangeStreamInsertDocument, ChangeStreamUpdateDocument, ObjectId } from "mongodb";
-import consoleUtilities from "../../../../../Utilities/console-utilities.js";
-import BaseCollection from "../../../abstract/base-collection.js";
+import BaseCollection from "../../abstract/base-collection.js";
 import { ExcludedRole, ExcludedRoleEntity } from "./excluded-roles-definitions.js";
-import { ChangeHandlers } from "../../../abstract/base-collection-definitions.js";
+import { ChangeHandlers } from "../../abstract/base-collection-definitions.js";
+import mongoConsoleUtilities from "../../../../Utilities/console/mongo-console-utilities.js";
 
 class ExcludedRolesCollection extends BaseCollection<ExcludedRoleEntity> {
   private cache: Array<ExcludedRole> = [];
@@ -90,7 +90,7 @@ class ExcludedRolesCollection extends BaseCollection<ExcludedRoleEntity> {
   }
 
   private log(msg: string) {
-    consoleUtilities.log(msg, "EXCLUDED-ROLES", "Cache");
+    mongoConsoleUtilities.log(msg, "EXCLUDED-ROLES", "Cache");
   }
 }
 

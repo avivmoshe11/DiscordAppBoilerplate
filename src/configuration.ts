@@ -1,5 +1,5 @@
 import assignDeep from "assign-deep";
-import consoleUtilities from "./Utilities/console-utilities.js";
+import appConsoleUtilities from "./Utilities/console/app-console-utilities.js";
 
 const appName = "PhasmophobiaElite";
 
@@ -19,7 +19,7 @@ const config = {
 };
 
 const environment = process.env.ENV == "production" ? "production" : "development";
-consoleUtilities.log(`Using ${environment} environment.`, "APP-LOADER", "environment");
+appConsoleUtilities.log(`Using ${environment} environment.`, "APP-LOADER", "environment");
 
 const selectedConfig: typeof config.common & typeof config.production & typeof config.development = assignDeep(config.common, config[environment]);
 

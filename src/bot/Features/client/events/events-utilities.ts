@@ -2,7 +2,7 @@ import fs from "fs";
 import path from "path";
 import { fileURLToPath, pathToFileURL } from "url";
 import { EventFileImport } from "./events-definitions.js";
-import consoleUtilities from "../../../../Utilities/console-utilities.js";
+import botConsoleUtilities from "../../../../Utilities/console/bot-console-utilities.js";
 
 class EventsUtilities {
   public static async getEventFiles() {
@@ -30,15 +30,15 @@ class EventsUtilities {
   }
 
   public static logCrashedCommand(eventName: string) {
-    consoleUtilities.error(`"${eventName}" event has crashed.`, "BOT", "event");
+    botConsoleUtilities.error(`"${eventName}" event has crashed.`, "BOT", "event");
   }
 
   public static logRegisteredEvents(eventNames: Array<string>) {
-    consoleUtilities.log(`Registered ${eventNames.join(", ")} events.`, "BOT", "app-load-process");
+    botConsoleUtilities.log(`Registered ${eventNames.join(", ")} events.`, "BOT", "app-load-process");
   }
 
   public static logEventTriggered(eventName: string) {
-    consoleUtilities.log(`${eventName} event has been triggered.`, "BOT", "event");
+    botConsoleUtilities.log(`${eventName} event has been triggered.`, "BOT", "event");
   }
 }
 

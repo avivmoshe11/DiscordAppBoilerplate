@@ -1,8 +1,8 @@
 import { ChangeStreamDeleteDocument, ChangeStreamDocument, ChangeStreamInsertDocument, ChangeStreamUpdateDocument, ObjectId } from "mongodb";
-import consoleUtilities from "../../../../../Utilities/console-utilities.js";
-import BaseCollection from "../../../abstract/base-collection.js";
+import BaseCollection from "../../abstract/base-collection.js";
 import { LFGRole, LFGRoleEntity } from "./lfg-roles-definitions.js";
-import { ChangeHandlers } from "../../../abstract/base-collection-definitions.js";
+import { ChangeHandlers } from "../../abstract/base-collection-definitions.js";
+import mongoConsoleUtilities from "../../../../Utilities/console/mongo-console-utilities.js";
 
 class LFGRolesCollection extends BaseCollection<LFGRoleEntity> {
   private cache: Array<LFGRole> = [];
@@ -90,7 +90,7 @@ class LFGRolesCollection extends BaseCollection<LFGRoleEntity> {
   }
 
   private log(msg: string) {
-    consoleUtilities.log(msg, "LFG-ROLES", "Cache");
+    mongoConsoleUtilities.log(msg, "LFG-ROLES", "Cache");
   }
 }
 

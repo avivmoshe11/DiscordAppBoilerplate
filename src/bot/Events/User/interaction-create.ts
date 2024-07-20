@@ -1,6 +1,7 @@
 import { Client, CommandInteraction } from "discord.js";
 import CommandsUtilities from "../../Features/client/application/commands/commands-utilities.js";
 import clientBl from "../../Features/client/client-bl.js";
+import botConsoleUtilities from "../../../Utilities/console/bot-console-utilities.js";
 
 export default {
   name: "interactionCreate",
@@ -16,8 +17,8 @@ async function commandHandler(client: Client, interaction: CommandInteraction) {
 
     try {
       await clientBl.getCommands()[interaction.commandName].action(client, interaction);
-    } catch {
-      CommandsUtilities.logCrashedCommand(interaction.commandName);
+    } catch (error) {
+      CommandsUtilities.logCrashedCommand(interaction.commandName, error);
     }
   }
 }
