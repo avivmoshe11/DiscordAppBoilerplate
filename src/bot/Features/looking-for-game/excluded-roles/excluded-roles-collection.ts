@@ -3,9 +3,10 @@ import BaseCollection from "../../abstract/base-collection.js";
 import { ExcludedRole, ExcludedRoleEntity } from "./excluded-roles-definitions.js";
 import { ChangeHandlers } from "../../abstract/base-collection-definitions.js";
 import mongoConsoleUtilities from "../../../../Utilities/console/mongo-console-utilities.js";
+import { Snowflake } from "discord.js";
 
 class ExcludedRolesCollection extends BaseCollection<ExcludedRoleEntity> {
-  private cache: Array<ExcludedRole> = [];
+  private cache: Array<ExcludedRoleEntity> = [];
 
   constructor() {
     super("excluded-roles");
@@ -36,6 +37,10 @@ class ExcludedRolesCollection extends BaseCollection<ExcludedRoleEntity> {
 
   public getCache() {
     return this.cache;
+  }
+
+  public getCacheById(id: Snowflake) {
+    return this.cache.find((role) => role.id === id);
   }
 
   /********************************************

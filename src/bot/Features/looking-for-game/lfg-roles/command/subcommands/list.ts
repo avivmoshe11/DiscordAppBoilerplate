@@ -6,7 +6,7 @@ export function listAction(client: Client, interaction: ChatInputCommandInteract
   const cachedRoles = lfgRolesCollection.getCache();
 
   return EmbedUtilities.createAdvancedEmbed({
-    title: "LFG Roles List",
+    title: "Lfg Roles List",
     description: "List of all lfg roles and matching name\nㅤ",
     fields: cachedRoles.map((role) => ({ name: `${role.name}`, value: `<@&${role.id}>`, inline: false }))
   });

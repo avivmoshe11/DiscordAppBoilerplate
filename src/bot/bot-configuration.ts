@@ -12,8 +12,21 @@ const config = {
     member: {
       id: "1216899522588966963"
     },
-    lfgCategory: {
-      id: "1263854964485259335"
+    channels: {
+      categories: {
+        lfg: {
+          id: "1263854964485259335"
+        },
+        voice: {
+          id: "1216780492418846731"
+        }
+      },
+      voices: {}
+    },
+    roles: {
+      everyone: {
+        id: "1216780491441832066"
+      }
     }
   },
   development: {

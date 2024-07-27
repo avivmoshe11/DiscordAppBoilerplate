@@ -1,11 +1,12 @@
 import { ChangeStreamDeleteDocument, ChangeStreamDocument, ChangeStreamInsertDocument, ChangeStreamUpdateDocument, ObjectId } from "mongodb";
 import BaseCollection from "../../abstract/base-collection.js";
-import { LFGRole, LFGRoleEntity } from "./lfg-roles-definitions.js";
+import { LfgRole, LfgRoleEntity } from "./lfg-roles-definitions.js";
 import { ChangeHandlers } from "../../abstract/base-collection-definitions.js";
 import mongoConsoleUtilities from "../../../../Utilities/console/mongo-console-utilities.js";
+import { Snowflake } from "discord.js";
 
-class LFGRolesCollection extends BaseCollection<LFGRoleEntity> {
-  private cache: Array<LFGRole> = [];
+class LfgRolesCollection extends BaseCollection<LfgRoleEntity> {
+  private cache: Array<LfgRoleEntity> = [];
 
   constructor() {
     super("lfg-roles");
@@ -18,11 +19,11 @@ class LFGRolesCollection extends BaseCollection<LFGRoleEntity> {
    ** User actions to handle roles collection *
    *******************************************/
 
-  public async insetRole(role: LFGRole) {
+  public async insetRole(role: LfgRole) {
     return this.insert(role);
   }
 
-  public async editRole(id: string, ...args: Partial<LFGRole>[]) {
+  public async editRole(id: string, ...args: Partial<LfgRole>[]) {
     return this.update({ id }, Object.assign({}, ...args));
   }
 
@@ -38,12 +39,16 @@ class LFGRolesCollection extends BaseCollection<LFGRoleEntity> {
     return this.cache;
   }
 
+  public getCacheById(id: Snowflake) {
+    return this.cache.find((role) => role.id === id) as LfgRole;
+  }
+
   /********************************************
    ** Automated actions to handle roles cache *
    ********************************************/
 
   public async initiateCache() {
-    this.log("Initiating LFG Roles cache...");
+    this.log("Initiating Lfg Roles cache...");
 
     try {
       const rolesFromDb = await this.getAll();
@@ -55,7 +60,7 @@ class LFGRolesCollection extends BaseCollection<LFGRoleEntity> {
     }
   }
 
-  private getHandlers(): ChangeHandlers<LFGRoleEntity> {
+  private getHandlers(): ChangeHandlers<LfgRoleEntity> {
     return {
       insert: this.handleInsert.bind(this),
       update: this.handleUpdate.bind(this),
@@ -63,15 +68,15 @@ class LFGRolesCollection extends BaseCollection<LFGRoleEntity> {
     };
   }
 
-  private handleInsert(change: ChangeStreamDocument<LFGRoleEntity>) {
-    const insertChange = change as ChangeStreamInsertDocument<LFGRoleEntity>;
+  private handleInsert(change: ChangeStreamDocument<LfgRoleEntity>) {
+    const insertChange = change as ChangeStreamInsertDocument<LfgRoleEntity>;
     const role = insertChange.fullDocument;
     this.cache.push({ _id: role._id, name: role.name, id: role.id });
     this.log(`Inserted role: ${role.name}`);
   }
 
-  private handleUpdate(change: ChangeStreamDocument<LFGRoleEntity>) {
-    const updateChange = change as ChangeStreamUpdateDocument<LFGRoleEntity>;
+  private handleUpdate(change: ChangeStreamDocument<LfgRoleEntity>) {
+    const updateChange = change as ChangeStreamUpdateDocument<LfgRoleEntity>;
     const updatedFields = updateChange.updateDescription.updatedFields;
     const _id = updateChange.documentKey._id;
     const index = this.cache.findIndex((role) => role._id?.toString() === _id.toString());
@@ -82,8 +87,8 @@ class LFGRolesCollection extends BaseCollection<LFGRoleEntity> {
     }
   }
 
-  private handleDelete(change: ChangeStreamDocument<LFGRoleEntity>) {
-    const deleteChange = change as ChangeStreamDeleteDocument<LFGRoleEntity>;
+  private handleDelete(change: ChangeStreamDocument<LfgRoleEntity>) {
+    const deleteChange = change as ChangeStreamDeleteDocument<LfgRoleEntity>;
     const _id = deleteChange.documentKey._id;
     this.cache = this.cache.filter((role) => role._id?.toString() !== _id.toString());
     this.log(`Deleted role: ${_id.toString()}`);
@@ -94,4 +99,4 @@ class LFGRolesCollection extends BaseCollection<LFGRoleEntity> {
   }
 }
 
-export default new LFGRolesCollection();
+export default new LfgRolesCollection();

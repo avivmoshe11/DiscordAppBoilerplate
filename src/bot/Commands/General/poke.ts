@@ -1,7 +1,7 @@
-import { SlashCommandBuilder, ChatInputCommandInteraction, PermissionFlagsBits, Client } from "discord.js";
+import { SlashCommandBuilder, ChatInputCommandInteraction, Client } from "discord.js";
 
 export default {
-  data: new SlashCommandBuilder().setName("poke").setDescription("Poke the bot").setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
+  data: new SlashCommandBuilder().setName("poke").setDescription("Poke the bot"),
   async execute(client: Client, interaction: ChatInputCommandInteraction) {
     const randomIndex = Math.floor(Math.random() * replyMessages.length);
     await interaction.reply({ content: replyMessages[randomIndex], allowedMentions: { repliedUser: true } });

@@ -1,4 +1,4 @@
-import { ChannelType, Guild, OverwriteResolvable, TextChannel } from "discord.js";
+import { CategoryChannelResolvable, ChannelType, Guild, OverwriteResolvable, TextChannel } from "discord.js";
 import ChannelsApi from "../channels-api.js";
 
 class TextChannelsApi extends ChannelsApi {
@@ -9,8 +9,8 @@ class TextChannelsApi extends ChannelsApi {
     this.channelType = ChannelType.GuildText;
   }
 
-  public async createTextChannel(name: string, permissions: Array<OverwriteResolvable> = []) {
-    return this.createChannel<TextChannel>({ name, type: this.channelType, permissionOverwrites: permissions });
+  public async createTextChannel(name: string, parent: CategoryChannelResolvable, permissions: Array<OverwriteResolvable> = []) {
+    return this.createChannel<TextChannel>({ name, type: this.channelType, parent, permissionOverwrites: permissions });
   }
 }
 

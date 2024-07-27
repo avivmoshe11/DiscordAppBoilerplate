@@ -16,7 +16,7 @@ export async function removeAction(client: Client, interaction: ChatInputCommand
 
 export function removeBuilder(subcommand: SlashCommandSubcommandBuilder) {
   subcommand.setName("remove");
-  subcommand.setDescription("Remove a LFG role.");
+  subcommand.setDescription("Remove a Lfg role.");
   subcommand.addRoleOption((role) => role.setName("role").setDescription("Role to remove").setRequired(true));
 
   return subcommand;

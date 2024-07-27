@@ -1,4 +1,4 @@
-import { ColorResolvable } from 'discord.js';
+import { ColorResolvable, EmbedFooterData } from "discord.js";
 
 export interface EmbedObject {
   color?: ColorResolvable;
@@ -14,6 +14,7 @@ export interface EmbedField {
 }
 
 export interface AdvancedEmbedObject extends EmbedObject {
+  footer?: Omit<EmbedFooterData, "proxyIconURL">;
   thumbnail?: string;
   url?: string;
   author?: string;

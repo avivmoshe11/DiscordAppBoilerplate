@@ -71,6 +71,7 @@ abstract class BaseCollection<T extends BaseEntity> {
 
       const response = await collection.insertOne(item);
       if (response.insertedId) return await this.getById(String(response.insertedId));
+
       return { error: "Invalid insertion." };
     });
   }
@@ -93,11 +94,24 @@ abstract class BaseCollection<T extends BaseEntity> {
     });
   }
 
-  public update(filters: Record<string, any>, replacers: Record<string, any>) {
+  public update(filters: Partial<T>, replacers: Partial<T>) {
     return this.executeOnCollection(async (collection: mongodb.Collection) => {
       if (!replacers.updateDate) replacers.updateDate = new Date();
+
       const response = await collection.findOneAndUpdate(filters, { $set: replacers });
       if (response?.value) return await this.getById(String(response.value._id));
+    });
+  }
+
+  public updateMany(filters: Partial<T>, replacers: Partial<T>) {
+    return this.executeOnCollection(async (collection: mongodb.Collection) => {
+      if (!replacers.updateDate) replacers.updateDate = new Date();
+
+      const response = await collection.updateMany(filters, { $set: replacers });
+      if (response.modifiedCount > 0) {
+        return await collection.find(filters).toArray();
+      }
+      return null;
     });
   }
 
@@ -108,6 +122,7 @@ abstract class BaseCollection<T extends BaseEntity> {
   private async executeOnCollection(action: (collection: mongodb.Collection) => any) {
     const collection = await this.getCollection();
     if (!collection) return;
+
     return await action(collection);
   }
 
