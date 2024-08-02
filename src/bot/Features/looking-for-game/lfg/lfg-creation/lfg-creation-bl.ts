@@ -65,7 +65,7 @@ class LfgCreationBL {
     }
 
     const textChannelApi = new TextChannelsApi(guild);
-    const newChannel = await textChannelApi.createTextChannel(lfgRole.name, botConfiguration.channels.categories.lfg.id);
+    const newChannel = await textChannelApi.createTextChannel(lfgRole.name, botConfiguration.channels.categories.voice.id);
 
     return newChannel;
   }
