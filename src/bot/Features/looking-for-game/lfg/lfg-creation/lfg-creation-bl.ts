@@ -48,7 +48,7 @@ class LfgCreationBL {
       promises.push(rolesApi.getRoleById(id));
     }
 
-    return await Promise.all(promises);
+    return Promise.all(promises);
   }
 
   private async getValidRoles(roleIds: Array<string>, guild: Guild) {
