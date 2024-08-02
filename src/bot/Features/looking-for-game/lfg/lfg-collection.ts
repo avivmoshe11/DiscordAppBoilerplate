@@ -81,7 +81,6 @@ class LfgPostsCollection extends BaseCollection<LfgPostEntity> {
         }));
 
       this.log("Cache initiated successfully");
-      console.log(this.cache);
     } catch {
       this.log("Cache initiation process failed, check DB connection.");
     }
