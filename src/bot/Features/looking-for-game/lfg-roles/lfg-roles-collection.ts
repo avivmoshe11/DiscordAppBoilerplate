@@ -43,6 +43,10 @@ class LfgRolesCollection extends BaseCollection<LfgRoleEntity> {
     return this.cache.find((role) => role.id === id) as LfgRole;
   }
 
+  public getLfgRolesNames() {
+    return this.cache.map((role) => role.name);
+  }
+
   /********************************************
    ** Automated actions to handle roles cache *
    ********************************************/

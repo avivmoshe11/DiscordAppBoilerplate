@@ -10,6 +10,13 @@ class LfgRolesUtilities {
   public static isRoleCached({ id, name }: LfgRole) {
     return lfgRolesCollection.getCache().some((role) => role.id === id || role.name === name);
   }
+
+  public static isLfgName(name: string) {
+    return lfgRolesCollection
+      .getLfgRolesNames()
+      .map((r) => r.toLowerCase())
+      .some((n) => n === name);
+  }
 }
 
 export default LfgRolesUtilities;

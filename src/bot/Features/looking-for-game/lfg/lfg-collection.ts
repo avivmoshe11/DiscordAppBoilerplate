@@ -51,6 +51,10 @@ class LfgPostsCollection extends BaseCollection<LfgPostEntity> {
     return this.cache.filter((post) => post.lfgRole.id === id);
   }
 
+  public getCachePostsByVoiceChannel(id: Snowflake) {
+    return this.cache.filter((post) => post.voiceChannelId === id);
+  }
+
   private isEntryValid(post: LfgPostEntity) {
     return post.userId && post.channelId && post.lfgRole && post.complementaryRoles;
   }
@@ -66,16 +70,18 @@ class LfgPostsCollection extends BaseCollection<LfgPostEntity> {
       const postsFromDb = await this.getAll();
       this.cache = postsFromDb
         .filter((post) => this.isEntryValid(post))
-        .map(({ userId, channelId, lfgRole, complementaryRoles, requestId, voiceChannelId }) => ({
+        .map(({ userId, channelId, lfgRole, complementaryRoles, requestId, voiceChannelId, messageId }) => ({
           userId,
           channelId,
           lfgRole,
           complementaryRoles,
           requestId,
-          voiceChannelId
+          voiceChannelId,
+          messageId
         }));
 
       this.log("Cache initiated successfully");
+      console.log(this.cache);
     } catch {
       this.log("Cache initiation process failed, check DB connection.");
     }

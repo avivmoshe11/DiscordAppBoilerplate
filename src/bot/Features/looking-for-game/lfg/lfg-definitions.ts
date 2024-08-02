@@ -9,6 +9,7 @@ export type LfgPost = {
   lfgRole: LfgRole;
   complementaryRoles: Array<Snowflake>;
   voiceChannelId?: Snowflake;
+  messageId: Snowflake;
 };
 
 export type LfgPostEntity = LfgPost & BaseEntity;

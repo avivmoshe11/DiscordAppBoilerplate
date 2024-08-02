@@ -1,4 +1,4 @@
-import { BaseFetchOptions, GuildChannelCreateOptions, GuildChannelEditOptions, SetChannelPositionOptions } from "discord.js"; // interface
+import { BaseFetchOptions, GuildBasedChannel, GuildChannelCreateOptions, GuildChannelEditOptions, SetChannelPositionOptions } from "discord.js"; // interface
 import { Snowflake, GuildChannelResolvable } from "discord.js"; // type
 import { Guild, GuildChannelManager, GuildChannel } from "discord.js"; // class
 import GuildsApi from "../guilds-api.js";
@@ -11,8 +11,8 @@ class ChannelsApi extends GuildsApi {
     this.channelManager = this.guild.channels;
   }
 
-  public async getChannelById(id: string, options?: BaseFetchOptions) {
-    return this.channelManager.fetch(id as Snowflake, options);
+  public async getChannelById<T = GuildBasedChannel>(id: string, options?: BaseFetchOptions) {
+    return this.channelManager.fetch(id as Snowflake, options) as T;
   }
 
   protected async createChannel<T = GuildChannel>(options: GuildChannelCreateOptions) {

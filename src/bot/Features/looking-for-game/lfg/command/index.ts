@@ -1,16 +1,17 @@
-import { SlashCommandBuilder, ChatInputCommandInteraction, PermissionFlagsBits, Client, Guild, GuildMember } from "discord.js";
+import { SlashCommandBuilder, ChatInputCommandInteraction, PermissionFlagsBits, Client } from "discord.js";
 import LfgUtilities from "../lfg-utilities.js";
 import lfgBl from "../lfg-bl.js";
 
 export default {
   data: getSlashCommand(),
   async execute(client: Client, interaction: ChatInputCommandInteraction) {
+    await interaction.reply({ content: "Processing your request..." });
     const additionalInfo = LfgUtilities.extractAdditionalInfo(interaction.options.get("roles-and-info")?.value as string);
     const roleIds = LfgUtilities.extractRoleIds(interaction.options.get("roles-and-info")?.value as string);
     const strict = interaction.options.get("strict", false) ?? false;
 
-    const response = await lfgBl.handleLfg(interaction, roleIds, additionalInfo, strict as boolean);
-    await interaction.reply({ content: response, ephemeral: true });
+    const response = await lfgBl.createLfg(interaction, roleIds, additionalInfo, strict as boolean);
+    await interaction.channel?.send({ content: response });
   }
 };
 
