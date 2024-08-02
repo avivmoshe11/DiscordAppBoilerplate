@@ -28,7 +28,7 @@ class LfgCreationBL {
       await this.postLfg(interaction.member as GuildMember, lfgRole, complementary, info, interaction.guild as Guild, requestId, voiceChannel.id);
     }
 
-    return `Lfg request process complete for request ${requestId}`;
+    return `Lfg request process complete for request "${requestId}"`;
   }
 
   private async divideLfgRolesInput(roleIds: Array<string>, guild: Guild) {
