@@ -19,7 +19,6 @@ function getSlashCommand() {
   const slashCommand = new SlashCommandBuilder();
   slashCommand.setName("lfg");
   slashCommand.setDescription("Looking for game");
-  slashCommand.setDefaultMemberPermissions(PermissionFlagsBits.Administrator);
   slashCommand.addStringOption((option) => option.setName("roles-and-info").setDescription("Roles to ping and additional info").setRequired(true));
   slashCommand.addBooleanOption((option) => option.setName("strict").setDescription("Must enforce complementary roles").setRequired(false));
 
