@@ -27,6 +27,15 @@ class LfgCreationUtilities {
       .join(" ");
   }
 
+  public static getLfgTextChannelPermissions(): Array<OverwriteResolvable> {
+    return [
+      {
+        id: botConfiguration.roles.everyone.id,
+        deny: ["SendMessages"]
+      }
+    ];
+  }
+
   public static formatLfgEmbed(member: GuildMember, additionalInfo: string, role: LfgRole, requestId: string, voiceId: Snowflake) {
     const fields: Array<EmbedField> = [];
 
@@ -35,7 +44,7 @@ class LfgCreationUtilities {
 
     return EmbedUtilities.createAdvancedEmbed({
       title: `${member.displayName} is looking for game`,
-      description: additionalInfo,
+      description: additionalInfo !== "" ? additionalInfo : "Join my lfg lobby!",
       fields,
       footer: { text: `${requestId}` }
     });
