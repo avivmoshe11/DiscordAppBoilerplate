@@ -31,8 +31,7 @@ const config = {
   },
   development: {
     mongo: {
-      //url: "mongodb://127.0.0.1:27017"
-      url: `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASS}@phasmophobiaelite.8qlntcd.mongodb.net/`
+      url: `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASS}@${process.env.MONGO_CLUSTER}`
     }
   },
   production: {}
