@@ -1,15 +1,15 @@
 import { ChatInputCommandInteraction, Guild, GuildMember, Role, Snowflake, TextBasedChannel } from "discord.js";
-import RolesApi from "../../../guilds/roles/roles-api.js";
+import RolesApi from "../../../../Discord-Api/guilds/roles/roles-api.js";
 import excludedRolesCollection from "../../excluded-roles/excluded-roles-collection.js";
 import lfgRolesCollection from "../../lfg-roles/lfg-roles-collection.js";
 import lfgCollection from "../lfg-collection.js";
-import TextChannelsApi from "../../../guilds/channels/text-channels/text-channels-api.js";
+import TextChannelsApi from "../../../../Discord-Api/guilds/channels/text-channels/text-channels-api.js";
 import { LfgRole } from "../../lfg-roles/lfg-roles-definitions.js";
 import botConfiguration from "../../../../bot-configuration.js";
-import ChannelsApi from "../../../guilds/channels/channels-api.js";
+import ChannelsApi from "../../../../Discord-Api/guilds/channels/channels-api.js";
 import LfgCreationUtilities from "./lfg-creation-utilities.js";
 import { v4 } from "uuid";
-import VoiceChannelsApi from "../../../guilds/channels/voice-channels/voice-channels-api.js";
+import VoiceChannelsApi from "../../../../Discord-Api/guilds/channels/voice-channels/voice-channels-api.js";
 import botConsoleUtilities from "../../../../../Utilities/console/bot-console-utilities.js";
 
 class LfgCreationBL {

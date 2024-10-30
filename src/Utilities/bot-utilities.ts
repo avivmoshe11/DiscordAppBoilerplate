@@ -1,5 +1,5 @@
 import dotenv from "dotenv";
-import clientBl from "../bot/Features/client/client-bl.js";
+import clientBl from "../bot/Discord-Api/client/client-bl.js";
 dotenv.config();
 
 class BotUtilities {

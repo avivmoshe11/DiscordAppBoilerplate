@@ -1,7 +1,7 @@
 import { Guild, TextChannel, VoiceChannel } from "discord.js";
 import lfgCollection from "../lfg-collection.js";
 import { LfgPostEntity } from "../lfg-definitions.js";
-import TextChannelsApi from "../../../guilds/channels/text-channels/text-channels-api.js";
+import TextChannelsApi from "../../../../Discord-Api/guilds/channels/text-channels/text-channels-api.js";
 import botConsoleUtilities from "../../../../../Utilities/console/bot-console-utilities.js";
 import { ObjectId } from "mongodb";
 

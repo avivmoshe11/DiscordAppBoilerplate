@@ -1,7 +1,7 @@
 import { TextChannel, VoiceChannel } from "discord.js";
-import VoiceChannelsUtilities from "../../../guilds/channels/voice-channels/voice-channels-utilities.js";
+import VoiceChannelsUtilities from "../../../../Discord-Api/guilds/channels/voice-channels/voice-channels-utilities.js";
 import lfgCollection from "../lfg-collection.js";
-import TextChannelsUtilities from "../../../guilds/channels/text-channels/text-channels-utilities.js";
+import TextChannelsUtilities from "../../../../Discord-Api/guilds/channels/text-channels/text-channels-utilities.js";
 import LfgRolesUtilities from "../../lfg-roles/lfg-roles-utilities.js";
 
 class LfgDeletionUtilities {
