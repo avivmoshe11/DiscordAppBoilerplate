@@ -1,7 +1,6 @@
 import { Client, CommandInteraction } from "discord.js";
 import CommandsUtilities from "../../Discord-Api/client/application/commands/commands-utilities.js";
 import clientBl from "../../Discord-Api/client/client-bl.js";
-import botConsoleUtilities from "../../../Utilities/console/bot-console-utilities.js";
 
 export default {
   name: "interactionCreate",

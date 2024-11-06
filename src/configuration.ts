@@ -1,7 +1,7 @@
 import assignDeep from "assign-deep";
-import appConsoleUtilities from "./Utilities/console/app-console-utilities.js";
+import { serverConsole } from "./Utilities/console/index.js";
 
-const appName = "PhasmophobiaElite";
+const appName = "DiscordAppBoilerplate";
 
 const config = {
   common: {
@@ -19,7 +19,7 @@ const config = {
 };
 
 const environment = process.env.ENV == "production" ? "production" : "development";
-appConsoleUtilities.log(`Using ${environment} environment.`, "APP-LOADER", "environment");
+serverConsole.log(`Using ${environment} environment.`, "APP-LOADER", "environment");
 
 const selectedConfig: typeof config.common & typeof config.production & typeof config.development = assignDeep(config.common, config[environment]);
 

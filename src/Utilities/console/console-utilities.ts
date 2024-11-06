@@ -1,31 +1,33 @@
 import chalk from "chalk";
 import generalUtilities from "../general-utilities.js";
-import { chalkColor } from "./console-definitions.js";
+import { chalkColor, ConsoleColors, ConsoleTypes } from "./console-definitions.js";
 
-abstract class ConsoleUtilities {
+class ConsoleUtilities {
   private logColor: chalkColor;
   private successColor: chalkColor;
   private errorColor: chalkColor;
+  private defaultTopic: string;
 
-  constructor(log: chalkColor = "blueBright", success: chalkColor = "greenBright", error: chalkColor = "red") {
-    this.logColor = log;
-    this.successColor = success;
-    this.errorColor = error;
+  constructor(consoleType: ConsoleTypes) {
+    this.logColor = ConsoleColors[consoleType];
+    this.successColor = "greenBright";
+    this.errorColor = "red";
+    this.defaultTopic = consoleType.toUpperCase();
   }
 
-  public log(msg: string, topic = "", subTopic = "") {
+  public log(msg: string, subTopic = "", topic = this.defaultTopic) {
     console.log(chalk[this.logColor](this.getPrefix(topic, subTopic) + msg));
   }
 
-  public success(msg: string, topic = "", subTopic = "") {
+  public success(msg: string, subTopic = "", topic = this.defaultTopic) {
     console.log(chalk[this.successColor](this.getPrefix(topic, subTopic) + msg));
   }
 
-  public error(msg: string, topic = "", subTopic = "") {
+  public error(msg: string, subTopic = "", topic = this.defaultTopic) {
     console.error(chalk[this.errorColor](this.getPrefix(topic, subTopic) + msg));
   }
 
-  public boldLog(msg: string, topic = "", subTopic = "") {
+  public boldLog(msg: string, subTopic = "", topic = this.defaultTopic) {
     console.log(chalk.bgMagentaBright(chalk.bold(chalk.green(this.getPrefix(topic, subTopic) + msg + " "))));
   }
 

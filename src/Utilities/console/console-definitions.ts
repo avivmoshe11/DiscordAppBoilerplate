@@ -1,3 +1,11 @@
+export enum ConsoleColors {
+  bot = "blueBright",
+  server = "cyan",
+  mongo = "magenta"
+}
+
+export type ConsoleTypes = keyof typeof ConsoleColors;
+
 export type chalkColor =
   | "black"
   | "red"

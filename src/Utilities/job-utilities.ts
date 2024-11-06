@@ -1,7 +1,7 @@
 import moment from "moment";
 import { CronJob } from "cron";
 import { JobDefinition } from "../Types/job-types.js";
-import appConsoleUtilities from "./console/app-console-utilities.js";
+import { serverConsole } from "./console/index.js";
 
 class JobUtilities {
   private jobDefinitions: JobDefinition[] = [];
@@ -45,11 +45,11 @@ class JobUtilities {
   }
 
   private cronLog(msg: string, jobDef: JobDefinition) {
-    appConsoleUtilities.log(msg, "CRON", jobDef.name);
+    serverConsole.log(msg, "CRON", jobDef.name);
   }
 
   private cronError(msg: string, jobDef: JobDefinition) {
-    appConsoleUtilities.error(msg, "CRON", jobDef.name);
+    serverConsole.error(msg, "CRON", jobDef.name);
   }
 
   private runningTimeText(startTime: any) {

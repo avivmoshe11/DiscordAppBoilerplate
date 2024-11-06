@@ -2,7 +2,7 @@ import * as mongodb from "mongodb";
 import { BaseEntity, ChangeHandlers } from "./base-collection-definitions.js";
 import mongoUtilities from "../../../Utilities/mongo-utilities.js";
 import { ChangeStreamDocument } from "mongodb";
-import mongoConsoleUtilities from "../../../Utilities/console/mongo-console-utilities.js";
+import { mongoConsole } from "../../../Utilities/console/index.js";
 
 abstract class BaseCollection<T extends BaseEntity> {
   public collectionName: string;
@@ -127,11 +127,11 @@ abstract class BaseCollection<T extends BaseEntity> {
   }
 
   public collectionLog(msg: string) {
-    mongoConsoleUtilities.log(msg, "DATABASE", this.collectionName);
+    mongoConsole.log(msg, this.collectionName);
   }
 
   public collectionError(msg: string) {
-    mongoConsoleUtilities.error(msg, "DATABASE", this.collectionName);
+    mongoConsole.error(msg, this.collectionName);
   }
 }
 
